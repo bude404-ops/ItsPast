@@ -12,7 +12,8 @@ import { TimelinePage } from './pages/TimelinePage';
 import { AdminIngestPage } from './pages/AdminIngestPage';
 import { EvidenceIngestPage } from './pages/EvidenceIngestPage';
 import { ReconstructionPage } from './pages/ReconstructionPage';
+import { ReconstructionJobsPage } from './pages/ReconstructionJobsPage';
 
 export default function App() {
-  return <Routes><Route element={<AppLayout />}><Route index element={<HomePage />} /><Route path="scan" element={<ScanPage />} /><Route path="explore" element={<ExplorePage />} /><Route path="map" element={<MapPage />} /><Route path="discoveries" element={<DiscoveriesPage />} /><Route path="profile" element={<ProfilePage />} /><Route path="search" element={<SearchPage />} /><Route path="entity/:id" element={<EntityPage />} /><Route path="timeline/:id" element={<TimelinePage />} /><Route path="reconstruction/:id" element={<ReconstructionPage />} /><Route path="admin/ingest" element={<AdminIngestPage />} /><Route path="admin/evidence" element={<EvidenceIngestPage />} /></Route></Routes>;
+  return <Routes><Route element={<AppLayout />}><Route index element={<HomePage />} /><Route path="scan" element={<ScanPage />} /><Route path="explore" element={<ExplorePage />} /><Route path="map" element={<MapPage />} /><Route path="discoveries" element={<DiscoveriesPage />} /><Route path="profile" element={<ProfilePage />} /><Route path="search" element={<SearchPage />} /><Route path="entity/:id" element={<EntityPage />} /><Route path="timeline/:id" element={<TimelinePage />} /><Route path="reconstruction/:id" element={<ReconstructionPage />} /><Route path="admin/reconstruction-jobs" element={<ReconstructionJobsPage />} /><Route path="admin/ingest" element={<AdminIngestPage />} /><Route path="admin/evidence" element={<EvidenceIngestPage />} /></Route></Routes>;
 }
