@@ -108,8 +108,7 @@ export function evidencePackageToSeedSql(draft: EvidencePackageDraft): string {
     });
   }
   lines.push('end $$;');
-  return lines.join('
-');
+  return lines.join('\n');
 }
 
 export async function submitEvidencePackage(draft: EvidencePackageDraft): Promise<{ ok: boolean; message: string }> {
