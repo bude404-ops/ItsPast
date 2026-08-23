@@ -1,0 +1,4 @@
+import { EntityCard } from '../components/EntityCard';
+import { demoEntities } from '../data/demoEntities';
+import { useSavedDiscoveries } from '../hooks/useSavedDiscoveries';
+export function DiscoveriesPage() { const { saved } = useSavedDiscoveries(); const entities = demoEntities.filter((entity) => saved.includes(entity.id)); return <section className="space-y-4"><div><p className="text-xs font-bold uppercase tracking-[0.24em] text-sepia-400">My Discoveries</p><h1 className="text-3xl font-black">Private saved history</h1><p className="mt-2 text-stone-400">Saved places, timelines, reconstructions, and source trails stay private by default.</p></div>{entities.length ? entities.map((entity) => <EntityCard key={entity.id} entity={entity} />) : <p className="rounded-3xl border border-stone-800 bg-stone-900 p-5 text-stone-400">No saved discoveries yet.</p>}</section>; }

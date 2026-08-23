@@ -1,0 +1,11 @@
+{
+  "name": "ItsPast",
+  "short_name": "ItsPast",
+  "description": "Everything has a story.",
+  "start_url": "/ItsPast/",
+  "scope": "/ItsPast/",
+  "display": "standalone",
+  "background_color": "#09090b",
+  "theme_color": "#111827",
+  "icons": []
+}
