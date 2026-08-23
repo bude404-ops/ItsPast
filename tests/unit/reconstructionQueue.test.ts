@@ -8,7 +8,7 @@ const sources: HistoricalSource[] = [
   { id: 's2', sourceType: 'NEWSPAPER', title: 'Opening article', description: 'Opening', confidence: 'HIGH', demoData: false }
 ];
 const timeline: TimelineEvent[] = [{ id: 'e1', entityId: entity.id, date: '1921', datePrecision: 'YEAR', title: 'Opened', description: 'Opened to public', eventType: 'opened', confidence: 'HIGH', sourceIds: ['s2'] }];
-const reconstruction: ReconstructionRequest = { id: 'r1', entityId: entity.id, targetYear: '1921', status: 'READY', confidence: 'HIGH', evidence: [{ id: 'ev1', label: 'DOCUMENTED', description: 'Facade shape documented by photo.', sourceIds: ['s1'] }, { id: 'ev2', label: 'STRONGLY_INFERRED', description: 'Opening context from article.', sourceIds: ['s2'] }] };
+const reconstruction: ReconstructionRequest = { id: 'r1', entityId: entity.id, targetYear: '1921', status: 'READY', confidence: 'CONFIRMED', evidence: [{ id: 'ev1', label: 'DOCUMENTED', description: 'Facade shape documented by photo.', sourceIds: ['s1'] }, { id: 'ev2', label: 'STRONGLY_INFERRED', description: 'Opening context from article.', sourceIds: ['s2'] }] };
 
 describe('reconstruction queue gate', () => {
   it('passes when documented evidence and direct high-confidence sources exist', () => {
