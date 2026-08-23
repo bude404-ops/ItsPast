@@ -69,6 +69,5 @@ export function buildReconstructionPrompt(input: { entity: PhysicalEntity; recon
     const sourceNames = evidence.sourceIds.map((id) => input.sources.find((source) => source.id === id)?.title ?? id).join(', ') || 'No named source';
     return `- ${evidence.label}: ${evidence.description} [${sourceNames}]`;
   });
-  return [`Reconstruct ${input.entity.name} in ${input.reconstruction.targetYear}.`, 'Use only source-backed visual claims.', ...sourceLines, 'Mark unknown visual details as unresolved; do not invent signage, materials, or surroundings.'].join('
-');
+  return [`Reconstruct ${input.entity.name} in ${input.reconstruction.targetYear}.`, 'Use only source-backed visual claims.', ...sourceLines, 'Mark unknown visual details as unresolved; do not invent signage, materials, or surroundings.'].join('\n');
 }
