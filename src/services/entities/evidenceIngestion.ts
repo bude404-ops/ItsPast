@@ -111,7 +111,8 @@ export function evidencePackageToSeedSql(draft: EvidencePackageDraft): string {
   return lines.join('\n');
 }
 
-export async function submitEvidencePackage(_draft: EvidencePackageDraft): Promise<{ ok: boolean; message: string }> {
+export async function submitEvidencePackage(draft: EvidencePackageDraft): Promise<{ ok: boolean; message: string }> {
+  void draft;
   if (!isSupabaseConfigured) return { ok: false, message: 'Supabase is not configured. Copy the SQL preview into an admin migration or seed file.' };
   return { ok: false, message: 'Evidence package submission is intentionally staged through reviewed SQL until source/event transaction RPC is deployed.' };
 }
