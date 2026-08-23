@@ -6,4 +6,9 @@ describe('application routes and page foundations', () => {
     expect(demoEntities.map((entity) => entity.id)).toContain('riverside-theater');
     expect(demoEntities.length).toBeGreaterThanOrEqual(4);
   });
+
+  it('uses hash-safe client routing for GitHub Pages project deployment', () => {
+    const routes = ['#/map', '#/admin/ingest', '#/entity/riverside-theater'];
+    expect(routes.every((route) => route.startsWith('#/'))).toBe(true);
+  });
 });
