@@ -1,4 +1,4 @@
-import type { ConfidenceLevel, HistoricalSource, PhysicalEntity, ReconstructionEvidence, ReconstructionRequest, TimelineEvent } from '../../types/entities';
+import type { ConfidenceLevel, HistoricalSource, PhysicalEntity, ReconstructionRequest, TimelineEvent } from '../../types/entities';
 
 export interface EvidenceGateReport {
   status: 'READY' | 'BLOCKED';
