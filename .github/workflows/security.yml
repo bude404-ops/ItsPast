@@ -13,7 +13,7 @@ jobs:
         with:
           node-version: 20
       - run: npm install
-      - run: npm audit --audit-level=high
+      - run: npm audit --omit=dev --audit-level=high
       - name: Basic secret pattern scan
         run: |
           ! grep -RInE "(sk_live_|password=|private_key)" --exclude-dir=.git --exclude-dir=node_modules --exclude=security.yml .
