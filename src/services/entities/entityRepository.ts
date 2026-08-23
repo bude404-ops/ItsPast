@@ -16,6 +16,7 @@ interface PhysicalEntityRow { id: string; name: string; description: string | nu
 interface HistoricalEventRow { id: string; entity_id: string; date: string | null; date_precision: DatePrecision | null; title: string; description: string | null; event_type: string | null; confidence: ConfidenceLevel | null; }
 interface HistoricalSourceRow { id: string; source_type: SourceType; title: string; publisher: string | null; author: string | null; publication_date: string | null; url: string | null; archive_reference: string | null; copyright_status: string | null; description: string | null; confidence: ConfidenceLevel | null; }
 interface EntitySourceRow { source_id: string; }
+interface EventSourceRow { event_id: string; source_id: string; }
 interface ReconstructionRow { id: string; entity_id: string; target_year: string; status: ReconstructionRequest['status']; prompt: string | null; confidence: ConfidenceLevel | null; }
 interface ReconstructionEvidenceRow { id: string; source_id: string | null; label: ReconstructionRequest['evidence'][number]['label']; description: string; }
 
@@ -84,7 +85,10 @@ export const supabaseEntityRepository: EntityRepository = {
   },
   async getTimeline(entityId) {
     const rows = await restFetch<HistoricalEventRow[]>(`historical_events?select=id,entity_id,date,date_precision,title,description,event_type,confidence&entity_id=eq.${encodeURIComponent(entityId)}&order=date.asc`);
-    return rows.map(mapHistoricalEventRow);
+    const events = rows.map(mapHistoricalEventRow);
+    if (!events.length) return events;
+    const links = await restFetch<EventSourceRow[]>(`event_sources?select=event_id,source_id&event_id=in.(${events.map((event) => encodeURIComponent(event.id)).join(',')})`);
+    return events.map((event) => ({ ...event, sourceIds: links.filter((link) => link.event_id === event.id).map((link) => link.source_id) }));
   },
   async getSources(entity) {
     const links = await restFetch<EntitySourceRow[]>(`entity_sources?select=source_id&entity_id=eq.${encodeURIComponent(entity.id)}`);
