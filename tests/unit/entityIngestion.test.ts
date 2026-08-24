@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { draftToSeedSql, validateEntityDraft } from '../../src/services/entities/entityIngestion';
+import { draftToSeedSql, validateEntityDraft } from '../../internal/reaper-admin/services/entityIngestion';
 
 describe('entity ingestion', () => {
   it('validates complete entity drafts', () => {

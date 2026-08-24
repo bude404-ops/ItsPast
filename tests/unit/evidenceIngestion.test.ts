@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { evidencePackageToSeedSql, validateEvidencePackage } from '../../src/services/entities/evidenceIngestion';
+import { evidencePackageToSeedSql, validateEvidencePackage } from '../../internal/reaper-admin/services/evidenceIngestion';
 
 const validPackage = {
   entityId: '00000000-0000-0000-0000-000000000000',
