@@ -8,7 +8,7 @@ describe('application routes and page foundations', () => {
   });
 
   it('uses hash-safe client routing for GitHub Pages project deployment', () => {
-    const routes = ['#/map', '#/admin/ingest', '#/admin/reconstruction-jobs', '#/entity/riverside-theater'];
+    const routes = ['#/map', '#/search', '#/explore', '#/entity/riverside-theater'];
     expect(routes.every((route) => route.startsWith('#/'))).toBe(true);
   });
 });

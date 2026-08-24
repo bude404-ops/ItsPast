@@ -6,7 +6,7 @@ const nav = [
 export function AppLayout() {
   return <div className="min-h-screen bg-stone-950 text-stone-50">
     <header className="sticky top-0 z-20 border-b border-stone-800/80 bg-stone-950/95 px-4 py-3 backdrop-blur">
-      <div className="mx-auto flex max-w-5xl items-center justify-between"><NavLink to="/" className="font-black tracking-[0.18em] text-sepia-400">ITSPAST</NavLink><div className="flex items-center gap-2"><NavLink to="/admin/ingest" className="hidden rounded-full border border-stone-700 px-3 py-2 text-stone-300 md:inline-block">Ingest</NavLink><NavLink to="/admin/evidence" className="hidden rounded-full border border-stone-700 px-3 py-2 text-stone-300 md:inline-block">Evidence</NavLink><NavLink to="/search" className="rounded-full border border-stone-700 px-3 py-2 text-stone-300" aria-label="Search">Search</NavLink></div></div>
+      <div className="mx-auto flex max-w-5xl items-center justify-between"><NavLink to="/" className="font-black tracking-[0.18em] text-sepia-400">ITSPAST</NavLink><div className="flex items-center gap-2"><NavLink to="/map" className="hidden rounded-full border border-stone-700 px-3 py-2 text-stone-300 md:inline-block">Map</NavLink><NavLink to="/explore" className="hidden rounded-full border border-stone-700 px-3 py-2 text-stone-300 md:inline-block">Explore</NavLink><NavLink to="/search" className="rounded-full border border-stone-700 px-3 py-2 text-stone-300" aria-label="Search">Search</NavLink></div></div>
     </header>
     <main className="mx-auto max-w-5xl px-4 pb-24 pt-5"><Outlet /></main>
     <nav className="fixed inset-x-0 bottom-0 z-30 border-t border-stone-800 bg-stone-950/95 px-2 py-2 backdrop-blur md:hidden">
