@@ -1,7 +1,7 @@
 import type { SourceRecord, SourceSearch } from '../../../types/research';
 import { normalizeGenericSource } from '../SourceNormalizer';
 import { wikimediaCommonsProviderConfig as config } from './providerConfigs';
-import { apiJson, jsonProvider, text } from './providerHelpers';
+import { apiJson, jsonProvider } from './providerHelpers';
 
 type Ext = Record<string, { value?: string }>;
 interface ImageInfo { url?: string; thumburl?: string; extmetadata?: Ext; }
