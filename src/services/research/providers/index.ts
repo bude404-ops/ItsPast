@@ -8,6 +8,7 @@ import { wikidataProvider } from './wikidata';
 import { wikimediaCommonsProvider } from './wikimediaCommons';
 import { nationalArchivesProvider } from './nationalArchivesProvider';
 export { sourceProviderConfigs } from './providerConfigs';
+export { currentSourceHealthRegistry, liveSourceHealthChecksEnabled, sourceHealthFromRegistry } from '../health/sourceHealth';
 export { historicalSourceProviders, noKeyCoreProviders, optionalOrExcludedProviders } from '../registry/sourceRegistry';
 
 export const sourceProviders: SourceProvider[] = [libraryOfCongressProvider, chroniclingAmericaProvider, wikidataProvider, wikimediaCommonsProvider, mediaWikiProvider, openStreetMapProvider, internetArchiveProvider, nationalArchivesProvider];

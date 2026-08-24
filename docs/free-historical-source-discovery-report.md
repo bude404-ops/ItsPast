@@ -1,20 +1,40 @@
 # ItsPast Free Historical Source Discovery Report
 
+Last verified: 2026-08-24
+
 ## Mission result
-Core historical research now runs in **FREE RESEARCH MODE** with **zero required paid APIs** and **zero required API keys**.
+
+ItsPast now has a free-source-first historical research engine foundation that requires **zero paid APIs** and **zero required API keys** for core mode.
+
+API-key providers may be added later, but the core engine only auto-runs enabled `NO_KEY_REQUIRED` sources.
 
 ## Free sources found
+
+### Primary no-key sources
+
 - Library of Congress
-- Chronicling America via Library of Congress JSON collection endpoint
+- Chronicling America via Library of Congress JSON collection path
 - Wikidata
 - Wikimedia Commons
 - Wikipedia / MediaWiki
 - OpenStreetMap / Nominatim
 - Internet Archive
 
+### Additional candidates discovered
+
+- National Archives Catalog API Review — high value, automated access/licensing still needs review before enabling.
+- Smithsonian Open Access — no-key Open Access/bulk candidate, not implemented yet.
+- USGS Historical Topographic Map Collection — no-key historic map candidate, not implemented yet.
+- GeoNames bulk gazetteer — no-key dump candidate for place-name enrichment, not implemented yet.
+- HathiTrust Bibliographic API — no-key bibliographic candidate, content rights need review.
+- DPLA — valuable but key-required, optional only.
+- Europeana — valuable but key-required, optional only.
+- NYPL Digital Collections — valuable but token-required, optional only.
+
 ## No-key sources implemented
+
 - `loc` — Library of Congress
-- `chronam` — Chronicling America via LOC
+- `chronam` — Chronicling America through the LOC collection JSON path
 - `wikidata` — Wikidata SPARQL
 - `commons` — Wikimedia Commons MediaWiki API
 - `mediawiki` — Wikipedia MediaWiki API
@@ -22,55 +42,101 @@ Core historical research now runs in **FREE RESEARCH MODE** with **zero required
 - `internet_archive` — Internet Archive Advanced Search
 
 ## Sources not implemented / excluded
-- National Archives Catalog: high-value source, but excluded from core because the current developer/API path is documented as API-key-based. Status: `KEY_REQUIRED`, optional future enhancement only.
-- State/city/university/museum/historical society collections: found as a class of future sources, not individually enabled until each has official API/download access and clear terms. Status for each future candidate should remain `SOURCE FOUND / AUTOMATED ACCESS: NOT CONFIRMED` until reviewed.
+
+- `nara` — previous National Archives optional provider remains disabled because the earlier path was treated as key-required.
+- `nara_catalog` — added as a separate review candidate; disabled until current official API terms, automated access, rate limits, and item-level rights are reviewed.
+- `smithsonian_open_access` — not implemented yet; promising no-key candidate, CC0 only for Open Access subset.
+- `usgs_historical_topo` — not implemented yet; promising no-key historic map layer.
+- `geonames_dumps` — not implemented yet; useful no-key bulk gazetteer, attribution required.
+- `hathitrust_bib` — not implemented yet; useful bibliographic lead source, full-text rights vary.
+- `dpla` — excluded from core because an API key is required.
+- `europeana` — excluded from core because an API key is required.
+- `nypl_digital` — excluded from core because an API token is required.
+
+Any source with unclear automated access is marked `UNKNOWN`, `FOUND_NOT_IMPLEMENTED`, or `NEEDS LEGAL/TERMS REVIEW`; it is not auto-used.
 
 ## License requirements
+
 - Per-record license/provenance is mandatory.
-- Public-domain/CC0 media can be copied and can be sent to AI processing by default.
-- CC BY/CC BY-SA/other open licenses may be displayable but AI processing remains `UNKNOWN` until use-case review.
-- Restricted/unknown media is metadata/link only.
+- Public-domain and CC0 media are the safest candidates for storage and reconstruction workflows.
+- CC BY, CC BY-SA, and other open licenses require attribution and may impose reuse/share-alike obligations.
+- Mixed-rights archives require item-level review.
+- Restricted or unknown media is metadata/link only.
+- AI processing remains `UNKNOWN` unless the license/terms clearly permit the intended use.
 
 ## Attribution requirements
-- LOC/Chronicling America: cite LOC and item creator/publisher where present.
-- Wikimedia: preserve per-file attribution and license metadata.
-- Wikipedia: CC BY-SA if text is reused; ItsPast uses it as discovery/context only.
-- OSM: `© OpenStreetMap contributors`, ODbL 1.0.
+
+- Library of Congress / Chronicling America: cite LOC and item creator/publisher where present.
+- Wikidata: CC0 data, but keep provider/source attribution for provenance.
+- Wikimedia Commons: preserve per-file creator, license, attribution, and URL.
+- Wikipedia / MediaWiki: do not use as definitive evidence; if text is reused, respect CC BY-SA.
+- OpenStreetMap: include `© OpenStreetMap contributors`; comply with ODbL.
 - Internet Archive: cite item creator/publisher and Internet Archive where present.
+- GeoNames future provider: CC BY 4.0 attribution required.
+- Smithsonian future provider: CC0 only for Open Access subset.
 
 ## Rate limits
-- All providers use caching, timeout, retry, exponential backoff and circuit breaker support.
-- OSM/Nominatim is throttled with the strictest public-service policy: 1 request/sec, single thread, cache.
-- CI uses mocks/fixtures only and never calls live services.
+
+- All providers use conservative caching, timeout, retry, exponential backoff, and circuit-breaker support.
+- OSM/Nominatim uses the strictest public-service posture: one request per second, single thread, cache results, identifying User-Agent.
+- Public CI never depends on live services.
+- Live source health checks are opt-in only through `RESEARCH_LIVE_TESTS=true`.
 
 ## Source quality scores
-See `src/services/research/registry/sourceRegistry.ts` for full component scores. Highest initial priorities:
+
+Highest current priorities:
+
 - Library of Congress — HIGH PRIORITY
 - Wikimedia Commons — HIGH PRIORITY
-- Wikidata — MEDIUM PRIORITY
-- Internet Archive — MEDIUM PRIORITY
-- Chronicling America via LOC — MEDIUM PRIORITY
-- OpenStreetMap/Nominatim — MEDIUM PRIORITY
-- MediaWiki/Wikipedia — MEDIUM PRIORITY for discovery only
+- Internet Archive — MEDIUM/HIGH value but mixed rights
+- Wikidata — MEDIUM/HIGH structured authority
+- Chronicling America via LOC — MEDIUM/HIGH, rights/snippet caution
+- OpenStreetMap/Nominatim — MEDIUM, essential current geography but not deep history
+- Wikipedia / MediaWiki — discovery/context only
 
-## Files created
-- Provider modules under `src/services/research/providers/`
-- Registry/runtime/orchestrator/health modules under `src/services/research/`
-- Migration `0008_free_historical_source_registry.sql`
-- Tests and fixtures under `tests/unit/` and `tests/fixtures/research/`
-- Source docs under `docs/sources/`
+Promising next additions:
+
+- Smithsonian Open Access
+- USGS Historical Topographic Map Collection
+- GeoNames bulk gazetteer
+- HathiTrust Bibliographic API
+
+## Files created or changed
+
+- Source registry schema and database-row export
+- Registry validation tests
+- Source health snapshot utility
+- Additional source candidate documentation
+- Source registry contract documentation
+- Free source discovery report refresh
+- Registry entries for additional candidates and optional/excluded sources
 
 ## Database changes
-- Expanded `historical_source_providers` with legal/access/quality fields.
-- Added `source_health_checks` for internal Source Test Lab.
-- Expanded `source_records` with license class, attribution, provenance, media storage and AI-processing flags.
+
+The code now exports a database-ready `historical_source_providers` row shape with all required fields:
+
+- access classification
+- key/auth requirements
+- automated access status
+- bulk availability
+- licensing/commercial-use posture
+- attribution requirements
+- rate limits
+- source coverage
+- media/text/map availability
+- implementation status
+- quality score
+- last tested date
+
+No paid provider or API-key provider is enabled for core mode.
 
 ## 12 pilot locations researched by fixture evaluator
-- Riverside Theater — building
+
+- Riverside Theater — historic building/business
 - Pennsylvania Station — lost landmark
 - Eads Bridge — bridge
 - Pullman Historic District — neighborhood
-- Fox Theatre — building
+- Fox Theatre — historic building
 - Route 66 gas station — historic business
 - Brooklyn Bridge — bridge
 - Union Station Los Angeles — landmark
@@ -79,18 +145,27 @@ See `src/services/research/registry/sourceRegistry.ts` for full component scores
 - Cast Iron District / SoHo — neighborhood
 - Old Post Office Washington DC — building
 
-## Reconstruction eligibility rule
-A reconstruction package is only eligible after evidence exists and the output must be labeled **AI HISTORICAL RECONSTRUCTION**, never historical photograph. Unknown features remain unknown; unsupported architectural details are not invented.
+## Reconstruction eligibility results
+
+The fixture evaluator covers 12 pilot location types and requires source-backed claims/evidence before a location can be marked eligible.
+
+Generated outputs must be labeled:
+
+**AI HISTORICAL RECONSTRUCTION**
+
+Never:
+
+**historical photograph**
 
 ## Recommended next sources
-Review, one by one, only if official APIs/downloads and terms are clear:
-- Digital Public Library of America
-- Harvard Library APIs
-- New York Public Library Digital Collections API
-- Smithsonian Open Access
-- USGS historical topographic maps
-- state historic preservation office GIS datasets
-- city open-data historic landmarks datasets
+
+1. Smithsonian Open Access
+2. USGS Historical Topographic Map Collection
+3. GeoNames bulk dumps
+4. HathiTrust Bibliographic API
+5. National Archives Catalog after terms/API review
+6. DPLA / Europeana / NYPL only as optional key-based enhancements
 
 ## API keys still optional
-Yes. The implemented core does not require API keys. API-key sources may be added later as optional enhancement providers, but they are not part of no-key automatic research.
+
+Yes. Core ItsPast historical research remains no-key. Optional API-key sources can be added later, but they are excluded from automatic free research mode by default.
