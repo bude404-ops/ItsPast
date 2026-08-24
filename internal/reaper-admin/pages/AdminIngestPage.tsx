@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { draftToSeedSql, submitEntityDraft, validateEntityDraft } from '../services/entities/entityIngestion';
+import { draftToSeedSql, submitEntityDraft, validateEntityDraft } from '../services/entityIngestion';
 
 const sampleDraft = JSON.stringify({
   name: 'Old City Waterworks',

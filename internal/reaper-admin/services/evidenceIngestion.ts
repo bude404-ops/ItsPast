@@ -1,5 +1,5 @@
-import { isSupabaseConfigured } from '../../lib/supabase';
-import type { ConfidenceLevel, DatePrecision, ReconstructionRequest, SourceType } from '../../types/entities';
+import { isSupabaseConfigured } from '../../src/lib/supabase';
+import type { ConfidenceLevel, DatePrecision, ReconstructionRequest, SourceType } from '../../src/types/entities';
 
 export interface SourceDraft { sourceType: SourceType; title: string; publisher?: string; author?: string; publicationDate?: string; url?: string; archiveReference?: string; copyrightStatus?: string; description: string; confidence: ConfidenceLevel; }
 export interface TimelineEventDraft { date: string; datePrecision: DatePrecision; title: string; description: string; eventType: string; confidence: ConfidenceLevel; sourceTitles: string[]; }

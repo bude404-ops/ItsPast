@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { evidencePackageToSeedSql, submitEvidencePackage, validateEvidencePackage } from '../services/entities/evidenceIngestion';
+import { evidencePackageToSeedSql, submitEvidencePackage, validateEvidencePackage } from '../services/evidenceIngestion';
 
 const samplePackage = JSON.stringify({
   entityId: '00000000-0000-0000-0000-000000000000',

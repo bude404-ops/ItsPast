@@ -1,5 +1,5 @@
-import { isSupabaseConfigured, supabaseConfig } from '../../lib/supabase';
-import type { ConfidenceLevel, CurrentStatus, EntityType } from '../../types/entities';
+import { isSupabaseConfigured, supabaseConfig } from '../../src/lib/supabase';
+import type { ConfidenceLevel, CurrentStatus, EntityType } from '../../src/types/entities';
 
 export interface EntityIngestionDraft {
   name: string;

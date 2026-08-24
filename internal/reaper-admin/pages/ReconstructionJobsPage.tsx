@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useReconstructionDashboard } from '../hooks/useReconstructionDashboard';
+import { useReconstructionDashboard } from '../../src/hooks/useReconstructionDashboard';
 
 const statusClass = (status: string) => status === 'QUEUED' ? 'bg-sepia-400 text-stone-950' : status === 'COMPLETED' ? 'bg-emerald-400 text-stone-950' : status === 'BLOCKED' ? 'bg-orange-400 text-stone-950' : status === 'RUNNING' ? 'bg-blue-400 text-stone-950' : 'bg-red-400 text-stone-950';
 

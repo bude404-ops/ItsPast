@@ -1,3 +1,14 @@
-import { useEffect, useState } from 'react';
-import { getCurrentUser, type AuthUser } from '../services/auth/authService';
-export function ProfilePage() { const [user, setUser] = useState<AuthUser | null>(null); useEffect(() => { void getCurrentUser().then(setUser); }, []); return <section className="space-y-4"><div><p className="text-xs font-bold uppercase tracking-[0.24em] text-sepia-400">Profile</p><h1 className="text-3xl font-black">Authentication foundation</h1></div><div className="rounded-3xl border border-stone-800 bg-stone-900 p-5"><p className="text-stone-300">Supabase Auth is abstracted. Demo mode returns a local user until environment variables are configured.</p><pre className="mt-4 overflow-x-auto rounded-2xl bg-stone-950 p-3 text-sm text-stone-300">{JSON.stringify(user, null, 2)}</pre></div></section>; }
+import { Link } from 'react-router-dom';
+
+const stats = [{ label: 'Discoveries', value: '0' }, { label: 'Collections', value: '0' }, { label: 'Contributions', value: '0' }];
+
+export function ProfilePage() {
+  return <section className="space-y-5">
+    <div><p className="text-xs font-bold uppercase tracking-[0.24em] text-sepia-400">Profile</p><h1 className="text-4xl font-black">Your history trail.</h1><p className="mt-2 text-stone-400">Manage discoveries, collections, contributions, premium, settings, and privacy.</p></div>
+    <div className="grid grid-cols-3 gap-2">{stats.map((stat) => <div key={stat.label} className="rounded-3xl border border-stone-800 bg-stone-900 p-4 text-center"><strong className="block text-2xl text-sepia-400">{stat.value}</strong><span className="text-xs text-stone-400">{stat.label}</span></div>)}</div>
+    <div className="space-y-2 rounded-3xl border border-stone-800 bg-stone-900 p-4">
+      {['Collections', 'Contributions', 'Premium', 'Settings', 'Privacy'].map((item) => <button key={item} className="block w-full rounded-2xl bg-stone-950 p-4 text-left font-bold">{item}</button>)}
+    </div>
+    <Link to="/scan" className="block rounded-3xl bg-sepia-400 px-5 py-4 text-center font-black tracking-[0.16em] text-stone-950">DISCOVER ITS PAST</Link>
+  </section>;
+}
