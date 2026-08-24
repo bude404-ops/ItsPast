@@ -26,7 +26,7 @@ describe('public ItsPast/admin separation', () => {
   });
 
   it('keeps admin UI files outside public pages', () => {
-    const pageFiles = walk('src/pages').map((file) => file.replace(/\/g, '/'));
+    const pageFiles = walk('src/pages').map((file) => file.replace(/\\\\/g, '/'));
     expect(pageFiles.some((file) => /Admin|Ingest|ReconstructionJobs/.test(file))).toBe(false);
   });
 
